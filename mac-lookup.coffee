@@ -12,7 +12,7 @@
 #
 #
 # Author:
-#  Sapan Ganguly
+#  Sapan Ganguly (with help from Stanley Stuart and Alex Kocharin over at nodejs@googlegroups.com)
 
 macvendorApiKey  = process.env.HUBOT_MAC_LOOKUP_API_KEY
 
@@ -24,11 +24,6 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         try
          json = JSON.parse(body)
-         console.log json 
-         msg.send "   company: #{json.company}\n
-           department: #{json.department}\n
-           address1: #{json.address1}\n
-           address2: #{json.address2}\n
-           country: #{json.country}\n "
+         msg.send "#{require('util').inspect(json[0])}"
         catch error
           msg.send "Er, couldn't find the vendor for that MAC"
